@@ -307,6 +307,30 @@
       font-size:14px;
     }
 
+    .selection-overview{
+      border-left:6px solid var(--westlake-bright);
+      background:#f8fbfd;
+      border-top:1px solid var(--westlake-border);
+      border-right:1px solid var(--westlake-border);
+      border-bottom:1px solid var(--westlake-border);
+      padding:16px 18px;
+      margin:0 0 18px;
+    }
+
+    .selection-overview h4{
+      margin:0 0 6px;
+      color:var(--westlake-dark);
+      font-size:18px;
+      font-weight:900;
+    }
+
+    .selection-overview p{
+      margin:0;
+      color:#475569;
+      font-size:14px;
+      max-width:920px;
+    }
+
     .results-grid{
       display:grid;
       grid-template-columns:repeat(3, minmax(0,1fr));
@@ -423,13 +447,8 @@
 
     @media (max-width:760px){
       .page-shell{ padding:24px 16px 56px; }
-      .hero-content{
-        flex-direction:column;
-        align-items:flex-start;
-      }
-      .headline-stack span{
-        font-size:28px;
-      }
+      .hero-content{ flex-direction:column; align-items:flex-start; }
+      .headline-stack span{ font-size:28px; }
       .piece-grid{
         grid-template-columns:repeat(6, 24px);
         grid-auto-rows:24px;
@@ -502,6 +521,8 @@
         </div>
       </div>
 
+      <div class="selection-overview" id="selectionOverview" style="display:none;"></div>
+
       <div class="results-grid" id="resultsGrid"></div>
       <div class="empty" id="emptyState">
         Choose a category and value to view matching product brands.
@@ -517,30 +538,8 @@
         description: "LLDPE film resins for food, consumer, industrial, agricultural, shrink, stretch, masterbatch, compounding, and general-purpose film applications.",
         resinType: ["LLDPE"],
         processingMethod: ["Blown film", "Cast film", "Compounding"],
-        market: [
-          "Packaging",
-          "Consumer Products",
-          "Industrial",
-          "Agriculture",
-          "Building, Construction & Infrastructure",
-          "Masterbatch & Compounding",
-          "Flexible Films"
-        ],
-        application: [
-          "Food Packaging",
-          "Non-Food Packaging",
-          "Flexible Films",
-          "Shrink Film",
-          "Stretch Film",
-          "Trash Bags & Liners",
-          "Agricultural Film",
-          "Heavy-Duty Film",
-          "Pouches & Liners",
-          "Household Wrap",
-          "General Purpose Film",
-          "Masterbatch Carrier",
-          "Compounding"
-        ],
+        market: ["Packaging","Consumer Products","Industrial","Agriculture","Building, Construction & Infrastructure","Masterbatch & Compounding","Flexible Films"],
+        application: ["Food Packaging","Non-Food Packaging","Flexible Films","Shrink Film","Stretch Film","Trash Bags & Liners","Agricultural Film","Heavy-Duty Film","Pouches & Liners","Household Wrap","General Purpose Film","Masterbatch Carrier","Compounding"],
         context: {
           "Packaging": "LLDPE grades used across flexible packaging, food packaging, shrink film, stretch film, liners, pouches, and general-purpose packaging films.",
           "Consumer Products": "Supports consumer film applications such as food storage bags, household films, trash bags, liners, and general-purpose consumer packaging.",
@@ -548,9 +547,7 @@
           "Agriculture": "Supports agricultural film applications where film strength, durability, and outdoor performance are important.",
           "Building, Construction & Infrastructure": "Supports selected building, construction, and infrastructure-adjacent film uses where LLDPE film performance is relevant.",
           "Masterbatch & Compounding": "Supports masterbatch and compounding customers as an LLDPE carrier resin option for film masterbatches and compound formulations.",
-          "Flexible Films": "Core LLDPE film family for blown and cast film applications including shrink, stretch, food, consumer, industrial, and agricultural films.",
-          "Masterbatch Carrier": "Can serve as a carrier resin in selected masterbatch and compound applications.",
-          "Compounding": "Supports compound formulations where LLDPE base resin performance is needed."
+          "Flexible Films": "Core LLDPE film family for blown and cast film applications including shrink, stretch, food, consumer, industrial, and agricultural films."
         }
       },
       {
@@ -559,31 +556,14 @@
         description: "Clarity-focused LLDPE film family used where visual appearance, toughness, and film performance matter.",
         resinType: ["LLDPE"],
         processingMethod: ["Blown film"],
-        market: [
-          "Packaging",
-          "Agriculture",
-          "Healthcare & Hygiene",
-          "Flexible Films",
-          "Barrier & Multilayer Packaging"
-        ],
-        application: [
-          "Food Packaging",
-          "Medical Packaging",
-          "Flexible Films",
-          "Agricultural Film",
-          "Barrier Structures",
-          "Shrink Film",
-          "High Clarity Film",
-          "Frozen Food Packaging"
-        ],
+        market: ["Packaging","Agriculture","Healthcare & Hygiene","Flexible Films","Barrier & Multilayer Packaging"],
+        application: ["Food Packaging","Medical Packaging","Flexible Films","Agricultural Film","Barrier Structures","Shrink Film","High Clarity Film","Frozen Food Packaging"],
         context: {
           "Packaging": "Clarity-focused LLDPE for packaging film applications where appearance, toughness, and film performance are important.",
           "Agriculture": "Supports agricultural film applications where clarity and performance may be beneficial.",
           "Healthcare & Hygiene": "Supports healthcare and medical packaging films where clarity and consistency are important.",
           "Flexible Films": "Clarity-focused LLDPE option for blown film applications.",
-          "Barrier & Multilayer Packaging": "Can support high-clarity film layers within multilayer packaging structures where visual appearance and film performance matter.",
-          "High Clarity Film": "Designed for film applications where clarity is a key performance need.",
-          "Frozen Food Packaging": "Supports frozen food film applications where clarity and toughness are important."
+          "Barrier & Multilayer Packaging": "Can support high-clarity film layers within multilayer packaging structures where visual appearance and film performance matter."
         }
       },
       {
@@ -592,25 +572,8 @@
         description: "High-performance LLDPE film family for demanding applications requiring strength, toughness, and durability.",
         resinType: ["LLDPE"],
         processingMethod: ["Blown film"],
-        market: [
-          "Packaging",
-          "Consumer Products",
-          "Industrial",
-          "Agriculture",
-          "Flexible Films",
-          "Sustainability & Circular Solutions"
-        ],
-        application: [
-          "Flexible Films",
-          "Trash Bags & Liners",
-          "Heavy-Duty Film",
-          "Protective Films",
-          "Industrial Liners & Containment",
-          "Agricultural Film",
-          "Shrink Film",
-          "Recycle-Ready Structures",
-          "High Strength Film"
-        ],
+        market: ["Packaging","Consumer Products","Industrial","Agriculture","Flexible Films","Sustainability & Circular Solutions"],
+        application: ["Flexible Films","Trash Bags & Liners","Heavy-Duty Film","Protective Films","Industrial Liners & Containment","Agricultural Film","Shrink Film","Recycle-Ready Structures","High Strength Film"],
         context: {
           "Packaging": "High-performance LLDPE for demanding packaging films that require strength, toughness, and durability.",
           "Consumer Products": "Supports high-performance trash bags, liners, and heavy-duty consumer film applications.",
@@ -626,24 +589,8 @@
         description: "LDPE extrusion coating resins for food, medical, paperboard, coating, and laminating applications.",
         resinType: ["LDPE"],
         processingMethod: ["Extrusion coating", "Lamination", "Coating"],
-        market: [
-          "Packaging",
-          "Healthcare & Hygiene",
-          "Coatings, Adhesives & Specialty Materials",
-          "Extrusion Coating & Lamination",
-          "Barrier & Multilayer Packaging"
-        ],
-        application: [
-          "Extrusion Coating",
-          "Lamination",
-          "Food Packaging",
-          "Medical Packaging",
-          "Paperboard Coating",
-          "Liquid Packaging Board",
-          "Folding Cartons",
-          "Barrier Structures",
-          "Coatings"
-        ],
+        market: ["Packaging","Healthcare & Hygiene","Coatings, Adhesives & Specialty Materials","Extrusion Coating & Lamination","Barrier & Multilayer Packaging"],
+        application: ["Extrusion Coating","Lamination","Food Packaging","Medical Packaging","Paperboard Coating","Liquid Packaging Board","Folding Cartons","Barrier Structures","Coatings"],
         context: {
           "Packaging": "LDPE extrusion coating portfolio for food packaging, medical packaging, paperboard, cups, folding cartons, and coated packaging structures.",
           "Healthcare & Hygiene": "Supports medical packaging and coated structures where consistency and coating performance are important.",
@@ -658,25 +605,8 @@
         description: "Functionalized polymers for tie-layer, adhesion, and multilayer barrier structure support.",
         resinType: ["Functionalized Polymers"],
         processingMethod: ["Blown film", "Cast film", "Extrusion coating", "Lamination"],
-        market: [
-          "Packaging",
-          "Healthcare & Hygiene",
-          "Coatings, Adhesives & Specialty Materials",
-          "Extrusion Coating & Lamination",
-          "Barrier & Multilayer Packaging"
-        ],
-        application: [
-          "Adhesion & Tie Layers",
-          "Barrier Structures",
-          "Multilayer Packaging",
-          "Sterile Packaging",
-          "Medical Packaging",
-          "Extrusion Coating",
-          "Lamination",
-          "EVOH Structures",
-          "Nylon Structures",
-          "PET Structures"
-        ],
+        market: ["Packaging","Healthcare & Hygiene","Coatings, Adhesives & Specialty Materials","Extrusion Coating & Lamination","Barrier & Multilayer Packaging"],
+        application: ["Adhesion & Tie Layers","Barrier Structures","Multilayer Packaging","Sterile Packaging","Medical Packaging","Extrusion Coating","Lamination","EVOH Structures","Nylon Structures","PET Structures"],
         context: {
           "Packaging": "Tie-layer and adhesion support for multilayer packaging structures.",
           "Healthcare & Hygiene": "Supports medical and sterile packaging structures where multilayer adhesion is needed.",
@@ -691,31 +621,8 @@
         description: "Plastomer resins for toughness, melt strength, puncture resistance, bubble stability, and high-performance films.",
         resinType: ["Plastomers"],
         processingMethod: ["Blown film", "Cast film", "Extrusion", "Compounding"],
-        market: [
-          "Packaging",
-          "Industrial",
-          "Agriculture",
-          "Building, Construction & Infrastructure",
-          "Masterbatch & Compounding",
-          "Flexible Films",
-          "Barrier & Multilayer Packaging",
-          "Sustainability & Circular Solutions"
-        ],
-        application: [
-          "Flexible Films",
-          "Food Packaging",
-          "Heavy-Duty Film",
-          "Protective Films",
-          "Agricultural Film",
-          "Irrigation Tubing",
-          "Geomembranes",
-          "Barrier Structures",
-          "Impact Modification",
-          "Recycle-Ready Structures",
-          "Puncture Resistance",
-          "Melt Strength",
-          "Compounding"
-        ],
+        market: ["Packaging","Industrial","Agriculture","Building, Construction & Infrastructure","Masterbatch & Compounding","Flexible Films","Barrier & Multilayer Packaging","Sustainability & Circular Solutions"],
+        application: ["Flexible Films","Food Packaging","Heavy-Duty Film","Protective Films","Agricultural Film","Irrigation Tubing","Geomembranes","Barrier Structures","Impact Modification","Recycle-Ready Structures","Puncture Resistance","Melt Strength","Compounding"],
         context: {
           "Packaging": "Supports high-performance packaging films where toughness, puncture resistance, and film integrity are important.",
           "Industrial": "Supports heavy-duty protective packaging and industrial film applications requiring toughness.",
@@ -733,22 +640,8 @@
         description: "Performance PCR solutions for recycled-content film systems and circular packaging applications.",
         resinType: ["Specialty / PCR"],
         processingMethod: ["Blown film", "Cast film"],
-        market: [
-          "Packaging",
-          "Consumer Products",
-          "Industrial",
-          "Flexible Films",
-          "Sustainability & Circular Solutions"
-        ],
-        application: [
-          "PCR Integration",
-          "Circular Packaging",
-          "Recycle-Ready Structures",
-          "Trash Bags & Liners",
-          "Heavy-Duty Film",
-          "Down-Gauging Support",
-          "Recycled-Content Film"
-        ],
+        market: ["Packaging","Consumer Products","Industrial","Flexible Films","Sustainability & Circular Solutions"],
+        application: ["PCR Integration","Circular Packaging","Recycle-Ready Structures","Trash Bags & Liners","Heavy-Duty Film","Down-Gauging Support","Recycled-Content Film"],
         context: {
           "Packaging": "Supports recycled-content packaging film structures.",
           "Consumer Products": "Supports recycled-content consumer film applications such as trash bags and liners.",
@@ -763,22 +656,8 @@
         description: "Recycle modifiers that support film strength, bubble stability, and down-gauging with recycled content.",
         resinType: ["Specialty / Modifier"],
         processingMethod: ["Blown film", "Cast film", "Compounding"],
-        market: [
-          "Packaging",
-          "Consumer Products",
-          "Industrial",
-          "Flexible Films",
-          "Sustainability & Circular Solutions"
-        ],
-        application: [
-          "PCR Integration",
-          "Recycle-Ready Structures",
-          "Down-Gauging Support",
-          "Circular Packaging",
-          "Trash Bags & Liners",
-          "Heavy-Duty Film",
-          "Bubble Stability"
-        ],
+        market: ["Packaging","Consumer Products","Industrial","Flexible Films","Sustainability & Circular Solutions"],
+        application: ["PCR Integration","Recycle-Ready Structures","Down-Gauging Support","Circular Packaging","Trash Bags & Liners","Heavy-Duty Film","Bubble Stability"],
         context: {
           "Packaging": "Supports packaging film performance when recycled content or downgauging is part of the structure.",
           "Consumer Products": "Supports consumer film applications such as trash bags and liners where recycled content performance is needed.",
@@ -793,33 +672,8 @@
         description: "EVA copolymers for packaging, films, tubing, heat-seal layers, foams, adhesives, solar, barrier structures, and specialty applications.",
         resinType: ["EVA"],
         processingMethod: ["Extrusion", "Compounding", "Blow molding", "Foaming", "Coating"],
-        market: [
-          "Packaging",
-          "Consumer Products",
-          "Masterbatch & Compounding",
-          "Transportation",
-          "Healthcare & Hygiene",
-          "Building, Construction & Infrastructure",
-          "Coatings, Adhesives & Specialty Materials",
-          "Flexible Films",
-          "Barrier & Multilayer Packaging"
-        ],
-        application: [
-          "Flexible Films",
-          "High Clarity Packaging",
-          "Heat Seal Layer",
-          "Frozen Food Packaging",
-          "Foam",
-          "Tubing",
-          "Hot Melt Adhesives",
-          "Solar Film Encapsulant",
-          "Molded Components",
-          "Compounding",
-          "Ductility & Processability",
-          "Blow Molding",
-          "Cap Liners",
-          "Barrier Structures"
-        ],
+        market: ["Packaging","Consumer Products","Masterbatch & Compounding","Transportation","Healthcare & Hygiene","Building, Construction & Infrastructure","Coatings, Adhesives & Specialty Materials","Flexible Films","Barrier & Multilayer Packaging"],
+        application: ["Flexible Films","High Clarity Packaging","Heat Seal Layer","Frozen Food Packaging","Foam","Tubing","Hot Melt Adhesives","Solar Film Encapsulant","Molded Components","Compounding","Ductility & Processability","Blow Molding","Cap Liners","Barrier Structures"],
         context: {
           "Packaging": "EVA platform for packaging films, high-clarity packaging, frozen food packaging, heat seal layers, foam-related protective packaging, and related flexible structures.",
           "Consumer Products": "Supports consumer-related foam, tubing, molded, and specialty applications.",
@@ -838,34 +692,8 @@
         description: "Acrylate copolymers for flexibility, adhesion, lamination, extrusion coating, compounding, solar film, packaging, and compatibilization.",
         resinType: ["Acrylate Copolymers"],
         processingMethod: ["Extrusion coating", "Lamination", "Blown film", "Cast film", "Injection molding", "Compounding"],
-        market: [
-          "Packaging",
-          "Consumer Products",
-          "Building, Construction & Infrastructure",
-          "Masterbatch & Compounding",
-          "Transportation",
-          "Coatings, Adhesives & Specialty Materials",
-          "Extrusion Coating & Lamination",
-          "Barrier & Multilayer Packaging",
-          "Flexible Films"
-        ],
-        application: [
-          "Flexible Films",
-          "Food Packaging",
-          "Non-Food Packaging",
-          "Extrusion Coating",
-          "Lamination",
-          "Adhesion & Tie Layers",
-          "Barrier Structures",
-          "Compounding",
-          "Compatibilization",
-          "Impact Modification",
-          "Solar Film Encapsulant",
-          "PET Impact Modifier",
-          "Thermal Lamination",
-          "Masterbatch Carrier",
-          "Specialty Compounds"
-        ],
+        market: ["Packaging","Consumer Products","Building, Construction & Infrastructure","Masterbatch & Compounding","Transportation","Coatings, Adhesives & Specialty Materials","Extrusion Coating & Lamination","Barrier & Multilayer Packaging","Flexible Films"],
+        application: ["Flexible Films","Food Packaging","Non-Food Packaging","Extrusion Coating","Lamination","Adhesion & Tie Layers","Barrier Structures","Compounding","Compatibilization","Impact Modification","Solar Film Encapsulant","PET Impact Modifier","Thermal Lamination","Masterbatch Carrier","Specialty Compounds"],
         context: {
           "Packaging": "Supports packaging through flexible films, extrusion coating, lamination, adhesion, tie-layer, and multilayer structure applications.",
           "Consumer Products": "Supports selected consumer product applications where flexibility, adhesion, impact performance, or specialty copolymer functionality is needed.",
@@ -884,37 +712,8 @@
         description: "Specialty polymer waxes and functional additives used in adhesives, PVC lubrication, wax modification, emulsions, asphalt modification, cable filling, carpet backing, rubber processing, coatings, masterbatch, and compounding applications.",
         resinType: ["Specialty Polymers / Waxes"],
         processingMethod: ["Compounding", "Coating", "Lamination"],
-        market: [
-          "Masterbatch & Compounding",
-          "Coatings, Adhesives & Specialty Materials",
-          "Building, Construction & Infrastructure",
-          "Transportation",
-          "Specialty Waxes & Functional Additives"
-        ],
-        application: [
-          "Color Masterbatch",
-          "Additive Masterbatch",
-          "Dispersion & Lubrication",
-          "Compatibilization",
-          "Coupling Agents",
-          "Processing Aids",
-          "PVC Lubrication",
-          "Wax Modification",
-          "Hot Melt Adhesives",
-          "Coatings",
-          "Paperboard Coating",
-          "Asphalt Modification",
-          "Emulsions",
-          "Rubber Processing",
-          "Automotive Carpet Backing",
-          "Cable Filling",
-          "Wire & Cable",
-          "Specialty Compounds",
-          "Pigment Dispersion",
-          "Filler Loading",
-          "Torque Reduction",
-          "Mold Release"
-        ],
+        market: ["Masterbatch & Compounding","Coatings, Adhesives & Specialty Materials","Building, Construction & Infrastructure","Transportation","Specialty Waxes & Functional Additives"],
+        application: ["Color Masterbatch","Additive Masterbatch","Dispersion & Lubrication","Compatibilization","Coupling Agents","Processing Aids","PVC Lubrication","Wax Modification","Hot Melt Adhesives","Coatings","Paperboard Coating","Asphalt Modification","Emulsions","Rubber Processing","Automotive Carpet Backing","Cable Filling","Wire & Cable","Specialty Compounds","Pigment Dispersion","Filler Loading","Torque Reduction","Mold Release"],
         context: {
           "Masterbatch & Compounding": "Supports masterbatch and compounding through dispersion, lubrication, pigment dispersion, filler loading, reduced torque, and compatibilization support.",
           "Coatings, Adhesives & Specialty Materials": "Supports hot melt adhesives, coatings, emulsions, wax modification, paperboard coatings, asphalt modification, cable filling, and specialty material applications.",
@@ -948,33 +747,8 @@
         description: "LDPE film grades for heavy-duty film, shrink film, clarity film, cast film, foam, bakery bags, medical film, wire & cable, compounding base, and general film applications.",
         resinType: ["LDPE"],
         processingMethod: ["Blown film", "Cast film", "Foaming", "Compounding"],
-        market: [
-          "Packaging",
-          "Consumer Products",
-          "Industrial",
-          "Agriculture",
-          "Building, Construction & Infrastructure",
-          "Healthcare & Hygiene",
-          "Masterbatch & Compounding",
-          "Flexible Films"
-        ],
-        application: [
-          "Flexible Films",
-          "Food Packaging",
-          "Shrink Film",
-          "Heavy-Duty Film",
-          "Industrial Shrink Film",
-          "Clarity Film",
-          "Cast Film",
-          "Foam",
-          "Bakery Bags",
-          "Medical Film",
-          "Bubble Stabilizers",
-          "Compounding Base",
-          "Household Wrap",
-          "Construction Film",
-          "Wire & Cable"
-        ],
+        market: ["Packaging","Consumer Products","Industrial","Agriculture","Building, Construction & Infrastructure","Healthcare & Hygiene","Masterbatch & Compounding","Flexible Films"],
+        application: ["Flexible Films","Food Packaging","Shrink Film","Heavy-Duty Film","Industrial Shrink Film","Clarity Film","Cast Film","Foam","Bakery Bags","Medical Film","Bubble Stabilizers","Compounding Base","Household Wrap","Construction Film","Wire & Cable"],
         context: {
           "Packaging": "Supports food packaging, bakery bags, shrink film, clarity film, foam and cast film, protective foam packaging, and other packaging film applications.",
           "Consumer Products": "Supports consumer film uses such as household wrap and general-purpose film applications.",
@@ -983,10 +757,7 @@
           "Building, Construction & Infrastructure": "Supports construction film, foam-related building applications, and wire & cable-related LDPE film uses where applicable.",
           "Healthcare & Hygiene": "Supports medical film applications.",
           "Masterbatch & Compounding": "Supports masterbatch and compounding customers as an LDPE base resin option, including compounding base applications.",
-          "Flexible Films": "Core LDPE film grade family for blown and cast film applications.",
-          "Foam": "LDPE film grades include foam-related applications.",
-          "Compounding Base": "Supports compounding base applications.",
-          "Wire & Cable": "Supports wire and cable-related LDPE applications listed in the film grade portfolio."
+          "Flexible Films": "Core LDPE film grade family for blown and cast film applications."
         }
       },
       {
@@ -995,24 +766,8 @@
         description: "LDPE injection molding grades for packaging, fitments, personal hygiene, molded specialty uses, medical-related components, and selected compounding/base resin needs.",
         resinType: ["LDPE"],
         processingMethod: ["Injection molding", "Compounding"],
-        market: [
-          "Packaging",
-          "Consumer Products",
-          "Healthcare & Hygiene",
-          "Transportation",
-          "Masterbatch & Compounding"
-        ],
-        application: [
-          "Rigid Packaging",
-          "Caps & Closures",
-          "Fitments",
-          "Personal Hygiene",
-          "Medical Packaging",
-          "Surgical Scrub Brushes",
-          "Molded Components",
-          "Disposable Goods",
-          "Compounding"
-        ],
+        market: ["Packaging","Consumer Products","Healthcare & Hygiene","Transportation","Masterbatch & Compounding"],
+        application: ["Rigid Packaging","Caps & Closures","Fitments","Personal Hygiene","Medical Packaging","Surgical Scrub Brushes","Molded Components","Disposable Goods","Compounding"],
         context: {
           "Packaging": "Supports rigid packaging, caps, closures, lids, fitments, and molded packaging components.",
           "Consumer Products": "Supports molded consumer applications, disposable goods, and fitments.",
@@ -1179,7 +934,6 @@
       "Extrusion Coating & Lamination": ["TRUCOAT®","TYMAX®","EMAC® / EBAC®"],
       "Barrier & Multilayer Packaging": ["TYMAX®","EMAC® / EBAC®","TRUCOAT®","MXSTEN®","ELEVATE® EVA","HIFOR CLEAR®"],
       "Specialty Waxes & Functional Additives": ["EPOLENE®"],
-
       "LDPE": ["TRUCOAT®","LDPE Film Grades","LDPE Injection Grades"],
       "LLDPE": ["HIFOR®","HIFOR CLEAR®","HIFOR XTREME®"],
       "EVA": ["ELEVATE® EVA"],
@@ -1189,7 +943,6 @@
       "Specialty Polymers / Waxes": ["EPOLENE®"],
       "Specialty / PCR": ["PIVOTAL®"],
       "Specialty / Modifier": ["STEPUP™"],
-
       "Extrusion Coating": ["TRUCOAT®","TYMAX®","EMAC® / EBAC®"],
       "Lamination": ["TRUCOAT®","EMAC® / EBAC®","TYMAX®"],
       "Foam": ["ELEVATE® EVA","LDPE Film Grades"],
@@ -1213,6 +966,77 @@
       "Recycle-Ready Structures": ["PIVOTAL®","STEPUP™","HIFOR XTREME®","MXSTEN®"]
     };
 
+    const selectionDescriptions = {
+      market: {
+        "Packaging": "Westlake Polyethylene supports packaging applications with film, coating, tie-layer, sealant, specialty copolymer, and recycled-content solutions for flexible, rigid, coated, and multilayer structures.",
+        "Consumer Products": "Westlake Polyethylene materials support consumer product applications where durability, flexibility, clarity, toughness, softness, and processability are important.",
+        "Industrial": "Westlake Polyethylene offers film and specialty polymer solutions for demanding industrial applications requiring strength, toughness, containment, protection, and processing reliability.",
+        "Agriculture": "Westlake Polyethylene supports agricultural applications with film and tubing solutions designed for durability, toughness, and performance in demanding outdoor environments.",
+        "Building, Construction & Infrastructure": "Westlake Polyethylene products support building, construction, and infrastructure applications including construction films, geomembranes, tubing, wire and cable-related uses, asphalt modification, and specialty additive needs.",
+        "Masterbatch & Compounding": "Westlake Polyethylene supports masterbatch and compounding customers with base resins, specialty copolymers, plastomers, and EPOLENE® waxes that help with dispersion, processability, filler loading, and functional performance.",
+        "Transportation": "Westlake Polyethylene materials support transportation-related applications including molded components, soft trim, carpet backing, impact modification, specialty formulations, and performance-focused polymer systems.",
+        "Healthcare & Hygiene": "Westlake Polyethylene supports healthcare and hygiene applications with materials used in medical packaging, medical films, molded components, hygiene-related products, and specialty flexible structures.",
+        "Coatings, Adhesives & Specialty Materials": "Westlake Polyethylene offers coating, adhesive, lamination, hot melt, solar film, emulsion, and specialty material solutions through LDPE, EVA, acrylate copolymers, functionalized polymers, and EPOLENE® waxes.",
+        "Sustainability & Circular Solutions": "Westlake Polyethylene offers solutions that support recycled-content film, recycle modifiers, downgauging, and performance in structures designed for circularity and improved material efficiency.",
+        "Flexible Films": "Westlake Polyethylene provides LDPE, LLDPE, EVA, plastomer, acrylate copolymer, PCR, and recycle modifier solutions for blown and cast film applications.",
+        "Extrusion Coating & Lamination": "Westlake Polyethylene supports extrusion coating and lamination applications with LDPE coating resins, functionalized tie-layer polymers, and acrylate copolymers used in coated and laminated structures.",
+        "Barrier & Multilayer Packaging": "Westlake Polyethylene supports multilayer packaging structures with tie-layer, adhesion, coating, sealant, plastomer, EVA, and specialty copolymer solutions.",
+        "Specialty Waxes & Functional Additives": "EPOLENE® specialty polymer waxes and functional additives support adhesives, PVC lubrication, wax modification, emulsions, asphalt modification, paper coatings, cable filling, carpet backing, rubber processing, masterbatch, and compounding applications."
+      },
+      trademark: {
+        "HIFOR®": "HIFOR® LLDPE resins support flexible film applications across packaging, consumer, industrial, agricultural, and masterbatch-related uses.",
+        "HIFOR CLEAR®": "HIFOR CLEAR® supports clarity-focused film applications where appearance, toughness, and consistency are important.",
+        "HIFOR XTREME®": "HIFOR XTREME® supports demanding film applications requiring elevated strength, toughness, and durability.",
+        "TRUCOAT®": "TRUCOAT® LDPE extrusion coating resins support coated packaging, paperboard, medical packaging, and lamination applications.",
+        "TYMAX®": "TYMAX® functionalized polymers support tie-layer and adhesion performance in multilayer barrier packaging structures.",
+        "MXSTEN®": "MXSTEN® plastomers support toughness, puncture resistance, melt strength, and high-performance film or compound applications.",
+        "PIVOTAL®": "PIVOTAL® performance PCR solutions support recycled-content film and circular packaging applications.",
+        "STEPUP™": "STEPUP™ recycle modifiers help support film strength, bubble stability, and downgauging when recycled content is used.",
+        "ELEVATE® EVA": "ELEVATE® EVA copolymers support packaging, films, foam, tubing, hot melt adhesives, solar film, and specialty applications.",
+        "EMAC® / EBAC®": "EMAC® and EBAC® acrylate copolymers support flexibility, adhesion, lamination, extrusion coating, compounding, solar film, packaging, and compatibilization.",
+        "EPOLENE®": "EPOLENE® specialty polymer waxes support adhesives, wax modification, PVC lubrication, emulsions, asphalt, carpet backing, rubber processing, masterbatch, and compounding applications.",
+        "LDPE Film Grades": "Westlake LDPE film grades support blown and cast film applications including packaging, shrink film, foam, medical film, construction film, and general-purpose film uses.",
+        "LDPE Injection Grades": "Westlake LDPE injection grades support molded packaging, caps, closures, fitments, hygiene-related components, and selected specialty molded applications."
+      },
+      application: {
+        "Hot Melt Adhesives": "Westlake Polyethylene products support hot melt adhesive systems through base resin, modifier, wax, and specialty formulation options.",
+        "Wax Modification": "EPOLENE® supports wax modification applications where toughness, viscosity, gloss, adhesion, coating performance, or candle properties are important.",
+        "PVC Lubrication": "EPOLENE® supports PVC lubrication through internal and external lubrication options that help improve processing, fusion, surface finish, and die lubrication.",
+        "Asphalt Modification": "EPOLENE® supports road and roofing asphalt applications where viscosity modification, compaction, high-temperature performance, and blend stability are important.",
+        "Emulsions": "EPOLENE® supports emulsion applications including coatings, textiles, fruit and seed coatings, floor finishes, and surface-property enhancement.",
+        "Rubber Processing": "EPOLENE® supports rubber processing applications by helping improve flow, lubrication, dispersion, mold performance, and processability.",
+        "Automotive Carpet Backing": "EPOLENE® supports automotive carpet backing and soft-trim applications through fiber lock, adhesion, processing, and filled-system support.",
+        "Paperboard Coating": "Westlake Polyethylene products support paperboard coating applications where water resistance, oil resistance, gloss, adhesion, and coating performance are important.",
+        "Color Masterbatch": "Westlake Polyethylene products support color masterbatch applications through carrier resins, dispersion aids, lubrication, and processability.",
+        "Additive Masterbatch": "Westlake Polyethylene products support additive masterbatch applications where dispersion, compatibility, loading efficiency, and processability are important.",
+        "Foam": "Westlake LDPE and EVA products support foam applications used in packaging, consumer, building, and specialty end uses.",
+        "Solar Film Encapsulant": "Westlake EVA and acrylate copolymer solutions support solar film encapsulant applications where flexibility, adhesion, and specialty performance are needed."
+      },
+      processingMethod: {
+        "Blown film": "Browse Westlake Polyethylene product families used in blown film applications where strength, toughness, clarity, seal performance, or recycled-content performance may be required.",
+        "Cast film": "Browse Westlake Polyethylene product families used in cast film applications requiring processability, clarity, flexibility, or film performance.",
+        "Extrusion coating": "Browse Westlake Polyethylene product families used in extrusion coating applications, including coated packaging, paperboard, lamination, and multilayer structures.",
+        "Lamination": "Browse Westlake Polyethylene product families used in lamination structures where adhesion, flexibility, coating performance, or multilayer performance is important.",
+        "Injection molding": "Browse Westlake Polyethylene product families used in molded packaging, fitments, caps, closures, and selected specialty molded applications.",
+        "Blow molding": "Browse Westlake Polyethylene product families used in selected blow molding applications requiring flexibility, softness, or specialty performance.",
+        "Extrusion": "Browse Westlake Polyethylene product families used in extrusion applications including films, tubing, profiles, foam, and specialty structures.",
+        "Compounding": "Browse Westlake Polyethylene product families used in compounding applications where dispersion, processability, filler loading, flexibility, toughness, or compatibility are important.",
+        "Coating": "Browse Westlake Polyethylene product families used in coating applications including paperboard, adhesives, emulsions, hot melt systems, and specialty materials.",
+        "Foaming": "Browse Westlake Polyethylene product families used in foam applications for packaging, consumer, building, and specialty uses."
+      },
+      resinType: {
+        "LDPE": "Browse Westlake LDPE product families used in film, extrusion coating, injection molding, foam, packaging, medical film, and selected compounding applications.",
+        "LLDPE": "Browse Westlake LLDPE product families used in flexible film applications requiring toughness, strength, clarity, or durability.",
+        "EVA": "Browse Westlake EVA copolymers used in films, packaging, foam, tubing, hot melt adhesives, solar film, and specialty applications.",
+        "Plastomers": "Browse Westlake plastomer solutions used where toughness, seal performance, puncture resistance, impact modification, or melt strength are important.",
+        "Functionalized Polymers": "Browse Westlake functionalized polymers used for adhesion and tie-layer performance in multilayer structures.",
+        "Acrylate Copolymers": "Browse Westlake acrylate copolymers used for flexibility, adhesion, lamination, compatibilization, and specialty performance.",
+        "Specialty Polymers / Waxes": "Browse EPOLENE® specialty polymer waxes used across adhesives, wax modification, PVC lubrication, emulsions, asphalt, masterbatch, and compounding applications.",
+        "Specialty / PCR": "Browse Westlake performance PCR solutions designed to support recycled-content film applications.",
+        "Specialty / Modifier": "Browse Westlake recycle modifier solutions designed to support recycled-content film performance."
+      }
+    };
+
     const browseCards = document.getElementById("browseCards");
     const panelTitle = document.getElementById("panelTitle");
     const panelSub = document.getElementById("panelSub");
@@ -1221,6 +1045,7 @@
     const emptyState = document.getElementById("emptyState");
     const resultsTitle = document.getElementById("resultsTitle");
     const resultsSub = document.getElementById("resultsSub");
+    const selectionOverview = document.getElementById("selectionOverview");
 
     let activeCategory = null;
     let activeValue = null;
@@ -1250,6 +1075,25 @@
 
         return a.trademark.localeCompare(b.trademark);
       });
+    }
+
+    function getSelectionOverview() {
+      if (!activeCategory || !activeValue) return "";
+
+      const categoryDescriptions = selectionDescriptions[activeCategory] || {};
+      const description = categoryDescriptions[activeValue];
+
+      if (description) {
+        return `
+          <h4>${activeValue}</h4>
+          <p>${description}</p>
+        `;
+      }
+
+      return `
+        <h4>${activeValue}</h4>
+        <p>Westlake Polyethylene product families matched to this selection are shown below. Review the listed products to explore relevant materials, applications, and solution areas.</p>
+      `;
     }
 
     function renderBrowseCards() {
@@ -1316,6 +1160,8 @@
         resultsGrid.innerHTML = "";
         emptyState.style.display = "block";
         emptyState.textContent = "Choose a category and value to view matching product brands.";
+        selectionOverview.style.display = "none";
+        selectionOverview.innerHTML = "";
         return;
       }
 
@@ -1329,6 +1175,9 @@
 
       resultsTitle.textContent = `${sortedResults.length} matching product${sortedResults.length === 1 ? "" : "s"}`;
       resultsSub.textContent = `${activeValue} → matching product brands, sorted by relevance`;
+
+      selectionOverview.innerHTML = getSelectionOverview();
+      selectionOverview.style.display = "block";
 
       if (!sortedResults.length) {
         resultsGrid.innerHTML = "";
