@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WLK PE – Product Discovery Navigator</title>
+
+  <style>
+    :root{
+      --westlake-dark:#3A5896;
+      --westlake-bright:#09B5E7;
+      --westlake-white:#ffffff;
+      --westlake-text:#1f2937;
+      --westlake-muted:#5f6f85;
+      --westlake-bg:#f6f8fb;
+      --westlake-soft:#eef3f8;
+      --westlake-border:#d7dee7;
+      --westlake-gray:#A8A6A7;
+      --shadow:0 10px 24px rgba(31,41,55,.08);
+      --container:1240px;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      color:var(--westlake-text);
+      background:var(--westlake-bg);
+      line-height:1.5;
+    }
+
+    a{text-decoration:none;color:inherit}
+
+    .page-shell{
+      max-width:var(--container);
+      margin:0 auto;
+      padding:34px 24px 72px;
+    }
+
+    .hero{
+      background:var(--westlake-white);
+      color:var(--westlake-text);
+      border:1px solid var(--westlake-border);
+      border-radius:0;
+      padding:0;
+      box-shadow:var(--shadow);
+      margin-bottom:26px;
+      overflow:hidden;
+    }
+
+    .hero::before{
+      content:"";
+      display:block;
+      height:6px;
+      background:linear-gradient(90deg,var(--westlake-dark),var(--westlake-bright));
+    }
+
+    .brand-line{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:18px 28px 0;
+      color:var(--westlake-dark);
+    }
+
+    .brand-name{
+      font-weight:800;
+      font-size:15px;
+      letter-spacing:.01em;
+    }
+
+    .brand-divider{
+      width:1px;
+      height:18px;
+      background:#d5dce6;
+    }
+
+    .brand-tool{
+      font-size:13px;
+      color:var(--westlake-muted);
+      font-weight:700;
+    }
+
+    .hero-content{
+      display:flex;
+      justify-content:space-between;
+      gap:28px;
+      align-items:flex-end;
+      padding:26px 28px 30px;
+    }
+
+    .headline-stack{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      gap:7px;
+      margin-bottom:14px;
+    }
+
+    .headline-stack span{
+      display:inline-block;
+      background:var(--westlake-dark);
+      color:#fff;
+      font-weight:900;
+      font-size:34px;
+      line-height:1;
+      letter-spacing:.01em;
+      padding:8px 12px 9px;
+      text-transform:uppercase;
+    }
+
+    .hero p{
+      margin:0;
+      max-width:760px;
+      color:var(--westlake-text);
+      font-size:15px;
+    }
+
+    .piece-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 34px);
+      grid-auto-rows:34px;
+      gap:4px;
+      flex:0 0 auto;
+    }
+
+    .sq{display:block}
+
+    .sq.dark{background:var(--westlake-dark)}
+    .sq.bright{background:var(--westlake-bright)}
+    .sq.white{background:#eef3f8;border:1px solid #dbe3ec}
+
+    .module{
+      background:var(--westlake-white);
+      border:1px solid var(--westlake-border);
+      border-radius:0;
+      padding:26px;
+      box-shadow:var(--shadow);
+    }
+
+    .module h2{
+      margin:0 0 6px;
+      color:var(--westlake-dark);
+      font-size:26px;
+      font-weight:900;
+      letter-spacing:.01em;
+    }
+
+    .module .intro{
+      margin:0 0 22px;
+      color:var(--westlake-muted);
+      font-size:14px;
+      max-width:880px;
+    }
+
+    .browse-cards{
+      display:grid;
+      grid-template-columns:repeat(5, minmax(0,1fr));
+      gap:14px;
+      margin-bottom:20px;
+    }
+
+    .browse-card{
+      border:1px solid var(--westlake-border);
+      border-radius:0;
+      background:#ffffff;
+      padding:18px 16px;
+      text-align:left;
+      cursor:pointer;
+      transition:.18s ease;
+      min-height:98px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:7px;
+      position:relative;
+    }
+
+    .browse-card::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:0;
+      width:100%;
+      height:4px;
+      background:transparent;
+      transition:.18s ease;
+    }
+
+    .browse-card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 8px 18px rgba(15,23,42,.07);
+      border-color:#b8d9e8;
+    }
+
+    .browse-card:hover::after{
+      background:var(--westlake-bright);
+    }
+
+    .browse-card.active{
+      background:#f8fbfd;
+      border-color:var(--westlake-bright);
+      box-shadow:0 8px 18px rgba(9,181,231,.12);
+    }
+
+    .browse-card.active::after{
+      background:var(--westlake-bright);
+    }
+
+    .browse-card.soft{
+      background:#f4f7fb;
+      border-color:#e1e8f0;
+    }
+
+    .browse-card.soft .browse-card-title{
+      color:#51657f;
+    }
+
+    .browse-card.soft .browse-card-sub{
+      color:#8a98aa;
+    }
+
+    .browse-card.soft.active{
+      background:#edf8fc;
+      border-color:#a8dceb;
+    }
+
+    .browse-card-title{
+      color:var(--westlake-dark);
+      font-weight:900;
+      font-size:16px;
+    }
+
+    .browse-card-sub{
+      color:var(--westlake-muted);
+      font-size:12px;
+      line-height:1.3;
+    }
+
+    .panel{
+      border:1px solid var(--westlake-border);
+      border-radius:0;
+      background:#fff;
+      padding:18px;
+      margin-bottom:22px;
+    }
+
+    .panel-title{
+      margin:0 0 8px;
+      font-size:18px;
+      color:var(--westlake-dark);
+      font-weight:900;
+    }
+
+    .panel-sub{
+      margin:0 0 14px;
+      color:var(--westlake-muted);
+      font-size:14px;
+    }
+
+    .value-grid{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .value-chip{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:38px;
+      padding:0 13px;
+      border-radius:0;
+      border:1px solid #dbe5f1;
+      background:#fff;
+      color:var(--westlake-dark);
+      font-size:13px;
+      font-weight:800;
+      cursor:pointer;
+      transition:.18s ease;
+    }
+
+    .value-chip:hover{
+      border-color:var(--westlake-bright);
+      color:#007fa5;
+      background:#f7fcff;
+    }
+
+    .value-chip.selected{
+      background:var(--westlake-bright);
+      border-color:var(--westlake-bright);
+      color:#fff;
+    }
+
+    .results-header{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      align-items:flex-end;
+      flex-wrap:wrap;
+      margin-bottom:16px;
+      padding-top:2px;
+    }
+
+    .results-title{
+      margin:0;
+      color:var(--westlake-dark);
+      font-size:24px;
+      font-weight:900;
+    }
+
+    .results-sub{
+      color:var(--westlake-muted);
+      font-size:14px;
+    }
+
+    .results-grid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:18px;
+    }
+
+    .product-card{
+      background:#ffffff;
+      border:1px solid var(--westlake-border);
+      border-radius:0;
+      padding:18px;
+      box-shadow:0 6px 18px rgba(15,23,42,.05);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      position:relative;
+    }
+
+    .product-card::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:4px;
+      background:linear-gradient(90deg,var(--westlake-dark),var(--westlake-bright));
+    }
+
+    .product-card h3{
+      margin:6px 0 0;
+      color:var(--westlake-dark);
+      font-size:20px;
+      line-height:1.15;
+      font-weight:900;
+    }
+
+    .product-card p{
+      margin:0;
+      color:#475569;
+      font-size:14px;
+    }
+
+    .mini-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:4px;
+    }
+
+    .mini-tag{
+      font-size:11px;
+      font-weight:800;
+      color:#21405d;
+      background:#eef6fb;
+      border:1px solid #d6e7f2;
+      border-radius:0;
+      padding:6px 10px;
+    }
+
+    .card-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:auto;
+      padding-top:8px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:40px;
+      padding:0 14px;
+      border-radius:0;
+      border:1px solid transparent;
+      font-size:13px;
+      font-weight:900;
+      transition:.18s ease;
+    }
+
+    .btn-primary{
+      background:var(--westlake-dark);
+      color:#fff;
+      border-color:var(--westlake-dark);
+      width:100%;
+    }
+
+    .btn-primary:hover{
+      background:#2d477a;
+      border-color:#2d477a;
+    }
+
+    .empty{
+      text-align:center;
+      color:var(--westlake-muted);
+      padding:28px;
+      border:1px dashed #cad6e4;
+      border-radius:0;
+      background:#fff;
+    }
+
+    .page-shell::after{
+      content:"";
+      display:block;
+      height:2px;
+      background:var(--westlake-bright);
+      margin-top:28px;
+    }
+
+    @media (max-width:1100px){
+      .browse-cards{ grid-template-columns:repeat(3, minmax(0,1fr)); }
+      .results-grid{ grid-template-columns:repeat(2, minmax(0,1fr)); }
+    }
+
+    @media (max-width:760px){
+      .page-shell{ padding:24px 16px 56px; }
+      .hero-content{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .headline-stack span{
+        font-size:28px;
+      }
+      .piece-grid{
+        grid-template-columns:repeat(6, 24px);
+        grid-auto-rows:24px;
+      }
+      .browse-cards{ grid-template-columns:1fr; }
+      .results-grid{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-shell">
+
+    <section class="hero">
+      <div class="brand-line">
+        <span class="brand-name">Westlake Polyethylene</span>
+        <span class="brand-divider"></span>
+        <span class="brand-tool">Product Discovery Navigator</span>
+      </div>
+
+      <div class="hero-content">
+        <div>
+          <div class="headline-stack">
+            <span>Find</span>
+            <span>WLK PE</span>
+            <span>Solutions</span>
+          </div>
+
+          <p>
+            Browse by market, product family, resin type, application, or processing method.
+          </p>
+        </div>
+
+        <div class="piece-grid" aria-hidden="true">
+          <span class="sq dark"></span>
+          <span class="sq bright"></span>
+          <span class="sq white"></span>
+          <span class="sq bright"></span>
+          <span class="sq dark"></span>
+          <span class="sq white"></span>
+          <span class="sq white"></span>
+          <span class="sq dark"></span>
+          <span class="sq bright"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="module">
+      <h2>Browse by</h2>
+      <p class="intro">
+        Choose a category, then select a value to view matching WLK PE product families.
+      </p>
+
+      <div class="browse-cards" id="browseCards"></div>
+
+      <div class="panel" id="browsePanel">
+        <h3 class="panel-title" id="panelTitle">Choose a category to begin</h3>
+        <p class="panel-sub" id="panelSub">
+          Select one browse path at a time to keep the experience simple and easy to use.
+        </p>
+        <div class="value-grid" id="valueGrid"></div>
+      </div>
+
+      <div class="results-header">
+        <div>
+          <h3 class="results-title" id="resultsTitle">Product results</h3>
+          <div class="results-sub" id="resultsSub">
+            Start by selecting a category above.
+          </div>
+        </div>
+      </div>
+
+      <div class="results-grid" id="resultsGrid"></div>
+      <div class="empty" id="emptyState">
+        Choose a category and value to view matching product brands.
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const products = [
+      {
+        trademark: "HIFOR®",
+        url: "https://www.westlake.com/polyethylene-products/linear-low-density",
+        description: "LLDPE film resins for food, consumer, industrial, agricultural, shrink, stretch, masterbatch, compounding, and general-purpose film applications.",
+        resinType: ["LLDPE"],
+        processingMethod: ["Blown film", "Cast film", "Compounding"],
+        market: [
+          "Packaging",
+          "Consumer Products",
+          "Industrial",
+          "Agriculture",
+          "Building, Construction & Infrastructure",
+          "Masterbatch & Compounding",
+          "Flexible Films"
+        ],
+        application: [
+          "Food Packaging",
+          "Non-Food Packaging",
+          "Flexible Films",
+          "Shrink Film",
+          "Stretch Film",
+          "Trash Bags & Liners",
+          "Agricultural Film",
+          "Heavy-Duty Film",
+          "Pouches & Liners",
+          "Household Wrap",
+          "General Purpose Film",
+          "Masterbatch Carrier",
+          "Compounding"
+        ],
+        context: {
+          "Packaging": "LLDPE grades used across flexible packaging, food packaging, shrink film, stretch film, liners, pouches, and general-purpose packaging films.",
+          "Consumer Products": "Supports consumer film applications such as food storage bags, household films, trash bags, liners, and general-purpose consumer packaging.",
+          "Industrial": "Supports industrial film applications including shrink film, stretch film, heavy-duty film, protective film, and general-purpose industrial film uses.",
+          "Agriculture": "Supports agricultural film applications where film strength, durability, and outdoor performance are important.",
+          "Building, Construction & Infrastructure": "Supports selected building, construction, and infrastructure-adjacent film uses where LLDPE film performance is relevant.",
+          "Masterbatch & Compounding": "Supports masterbatch and compounding customers as an LLDPE carrier resin option for film masterbatches and compound formulations.",
+          "Flexible Films": "Core LLDPE film family for blown and cast film applications including shrink, stretch, food, consumer, industrial, and agricultural films.",
+          "Food Packaging": "Used in food packaging film structures where processability, toughness, and film performance are required.",
+          "Shrink Film": "LLDPE grades used for shrink film applications.",
+          "Stretch Film": "LLDPE grades used for stretch and cast stretch film applications.",
+          "Trash Bags & Liners": "Supports trash bag and liner applications where film toughness and performance are important.",
+          "Pouches & Liners": "Supports flexible packaging pouches, liners, and related film structures.",
+          "Household Wrap": "Supports household film and wrap applications.",
+          "Agricultural Film": "Supports agricultural film structures and outdoor film performance needs.",
+          "Masterbatch Carrier": "Can serve as a carrier resin in selected masterbatch and compound applications.",
+          "Compounding": "Supports compound formulations where LLDPE base resin performance is needed."
+        }
+      },
+      {
+        trademark: "HIFOR CLEAR®",
+        url: "https://www.westlake.com/polyethylene-products/hifor-clearr-hexene-and-butene",
+        description: "Clarity-focused LLDPE film family used where visual appearance, toughness, and film performance matter.",
+        resinType: ["LLDPE"],
+        processingMethod: ["Blown film"],
+        market: [
+          "Packaging",
+          "Agriculture",
+          "Healthcare & Hygiene",
+          "Flexible Films",
+          "Barrier & Multilayer Packaging"
+        ],
+        application: [
+          "Food Packaging",
+          "Medical Packaging",
+          "Flexible Films",
+          "Agricultural Film",
+          "Barrier Structures",
+          "Shrink Film",
+          "High Clarity Film",
+          "Frozen Food Packaging"
+        ],
+        context: {
+          "Packaging": "Clarity-focused LLDPE for packaging film applications where appearance, toughness, and film performance are important.",
+          "Agriculture": "Supports agricultural film applications where clarity and performance may be beneficial.",
+          "Healthcare & Hygiene": "Supports healthcare and medical packaging films where clarity and consistency are important.",
+          "Flexible Films": "Clarity-focused LLDPE option for blown film applications.",
+          "Barrier & Multilayer Packaging": "Can support high-clarity film layers within multilayer packaging structures where visual appearance and film performance matter.",
+          "Food Packaging": "Supports high-clarity food packaging films such as bakery and frozen food film applications.",
+          "Medical Packaging": "Supports medical packaging film applications where clarity and consistency are important.",
+          "High Clarity Film": "Designed for film applications where clarity is a key performance need.",
+          "Frozen Food Packaging": "Supports frozen food film applications where clarity and toughness are important."
+        }
+      },
+      {
+        trademark: "HIFOR XTREME®",
+        url: "https://www.westlake.com/polyethylene-products/hifor-xtremer-hexene",
+        description: "High-performance LLDPE film family for demanding applications requiring strength, toughness, and durability.",
+        resinType: ["LLDPE"],
+        processingMethod: ["Blown film"],
+        market: [
+          "Packaging",
+          "Consumer Products",
+          "Industrial",
+          "Agriculture",
+          "Flexible Films",
+          "Sustainability & Circular Solutions"
+        ],
+        application: [
+          "Flexible Films",
+          "Trash Bags & Liners",
+          "Heavy-Duty Film",
+          "Protective Films",
+          "Industrial Liners & Containment",
+          "Agricultural Film",
+          "Shrink Film",
+          "Recycle-Ready Structures",
+          "High Strength Film"
+        ],
+        context: {
+          "Packaging": "High-performance LLDPE for demanding packaging films that require strength, toughness, and durability.",
+          "Consumer Products": "Supports high-performance trash bags, liners, and heavy-duty consumer film applications.",
+          "Industrial": "Supports heavy-duty industrial films, protective films, containment films, and liner applications requiring toughness.",
+          "Agriculture": "Supports agricultural film applications where film strength and durability are critical.",
+          "Flexible Films": "High-performance film family for tough blown film applications.",
+          "Sustainability & Circular Solutions": "Can support stronger film structures that help enable performance in downgauging or recycle-ready approaches.",
+          "Trash Bags & Liners": "Supports high-performance trash bag and liner applications.",
+          "Heavy-Duty Film": "Designed for demanding film applications requiring toughness and durability.",
+          "Protective Films": "Supports protective film structures where puncture resistance and toughness are important.",
+          "Industrial Liners & Containment": "Supports industrial liner and containment film applications requiring strength and durability.",
+          "High Strength Film": "Supports applications requiring elevated film strength and durability."
+        }
+      },
+      {
+        trademark: "TRUCOAT®",
+        url: "https://www.westlake.com/polyethylene-products/trucoat%C2%AE-extrusion-coating-resins",
+        description: "LDPE extrusion coating resins for food, medical, paperboard, coating, and laminating applications.",
+        resinType: ["LDPE"],
+        processingMethod: ["Extrusion coating", "Lamination", "Coating"],
+        market: [
+          "Packaging",
+          "Healthcare & Hygiene",
+          "Coatings, Adhesives & Specialty Materials",
+          "Extrusion Coating & Lamination",
+          "Barrier & Multilayer Packaging"
+        ],
+        application: [
+          "Extrusion Coating",
+          "Lamination",
+          "Food Packaging",
+          "Medical Packaging",
+          "Paperboard Coating",
+          "Liquid Packaging Board",
+          "Folding Cartons",
+          "Barrier Structures",
+          "Coatings"
+        ],
+        context: {
+          "Packaging": "LDPE extrusion coating portfolio for food packaging, medical packaging, paperboard, cups, folding cartons, and coated packaging structures.",
+          "Healthcare & Hygiene": "Supports medical packaging and coated structures where consistency and coating performance are important.",
+          "Coatings, Adhesives & Specialty Materials": "Key WLK PE coating resin family for paperboard coatings, coated structures, and specialty coating applications.",
+          "Extrusion Coating & Lamination": "Primary TRUCOAT® home: LDPE grades designed for extrusion coating, laminating, paperboard, cups, folding cartons, and high-speed coating applications.",
+          "Barrier & Multilayer Packaging": "Supports coated and laminated packaging structures that may be part of multilayer or barrier packaging systems.",
+          "Extrusion Coating": "Designed specifically for extrusion coating applications.",
+          "Lamination": "Supports coating and laminating structures.",
+          "Paperboard Coating": "Used in paperboard coating applications such as liquid packaging, cups, and folding cartons.",
+          "Liquid Packaging Board": "Supports coating of paperboard used in liquid packaging structures.",
+          "Coatings": "Supports specialty coating applications using LDPE extrusion coating technology."
+        }
+      },
+      {
+        trademark: "TYMAX®",
+        url: "https://www.westlake.com/polyethylene-products/tymax%C2%AE-functionalized-polymers",
+        description: "Functionalized polymers for tie-layer, adhesion, and multilayer barrier structure support.",
+        resinType: ["Functionalized Polymers"],
+        processingMethod: ["Blown film", "Cast film", "Extrusion coating", "Lamination"],
+        market: [
+          "Packaging",
+          "Healthcare & Hygiene",
+          "Coatings, Adhesives & Specialty Materials",
+          "Extrusion Coating & Lamination",
+          "Barrier & Multilayer Packaging"
+        ],
+        application: [
+          "Adhesion & Tie Layers",
+          "Barrier Structures",
+          "Multilayer Packaging",
+          "Sterile Packaging",
+          "Medical Packaging",
+          "Extrusion Coating",
+          "Lamination",
+          "EVOH Structures",
+          "Nylon Structures",
+          "PET Structures"
+        ],
+        context: {
+          "Packaging": "Tie-layer and adhesion support for multilayer packaging structures.",
+          "Healthcare & Hygiene": "Supports medical and sterile packaging structures where multilayer adhesion is needed.",
+          "Coatings, Adhesives & Specialty Materials": "Functionalized polymer platform for adhesion and tie-layer performance in specialty structures.",
+          "Extrusion Coating & Lamination": "Supports adhesion and tie-layer needs in coating and lamination structures.",
+          "Barrier & Multilayer Packaging": "Primary TYMAX® home: tie-layer and adhesion support for PE-to-EVOH, PE-to-Nylon, and PE-to-PET multilayer barrier structures.",
+          "Adhesion & Tie Layers": "Designed to support adhesion between dissimilar materials in multilayer structures.",
+          "Barrier Structures": "Supports multilayer barrier packaging structures.",
+          "EVOH Structures": "Supports PE-to-EVOH multilayer adhesion needs.",
+          "Nylon Structures": "Supports PE-to-Nylon multilayer adhesion needs.",
+          "PET Structures": "Supports PE-to-PET multilayer adhesion needs."
+        }
+      },
+      {
+        trademark: "MXSTEN®",
+        url: "https://www.westlake.com/polyethylene-products/mxsten%C2%AE-plastomers",
+        description: "Plastomer resins for toughness, melt strength, puncture resistance, bubble stability, and high-performance films.",
+        resinType: ["Plastomers"],
+        processingMethod: ["Blown film", "Cast film", "Extrusion", "Compounding"],
+        market: [
+          "Packaging",
+          "Industrial",
+          "Agriculture",
+          "Building, Construction & Infrastructure",
+          "Masterbatch & Compounding",
+          "Flexible Films",
+          "Barrier & Multilayer Packaging",
+          "Performance Additives & Modification",
+          "Sustainability & Circular Solutions"
+        ],
+        application: [
+          "Flexible Films",
+          "Food Packaging",
+          "Heavy-Duty Film",
+          "Protective Films",
+          "Agricultural Film",
+          "Irrigation Tubing",
+          "Geomembranes",
+          "Barrier Structures",
+          "Impact Modification",
+          "Recycle-Ready Structures",
+          "Puncture Resistance",
+          "Melt Strength",
+          "Compounding"
+        ],
+        context: {
+          "Packaging": "Supports high-performance packaging films where toughness, puncture resistance, and film integrity are important.",
+          "Industrial": "Supports heavy-duty protective packaging and industrial film applications requiring toughness.",
+          "Agriculture": "Supports agricultural film and irrigation tubing applications requiring film strength and durability.",
+          "Building, Construction & Infrastructure": "Supports geomembranes, tubing, and infrastructure-adjacent applications where toughness and melt strength are relevant.",
+          "Masterbatch & Compounding": "Supports compound applications where impact modification, toughness, melt strength, or low-MI performance support is needed.",
+          "Flexible Films": "High-performance plastomer family for blown and cast film applications.",
+          "Barrier & Multilayer Packaging": "Supports high-performance multilayer films where toughness, puncture resistance, and seal performance are important.",
+          "Performance Additives & Modification": "Functions as a performance modifier for impact, toughness, melt strength, and puncture resistance in selected film, tubing, profile, and compound applications.",
+          "Sustainability & Circular Solutions": "Can help support film toughness and performance in structures where recycled content or downgauging is a consideration.",
+          "Impact Modification": "Supports toughness and impact performance in selected applications.",
+          "Melt Strength": "Supports melt strength and bubble stability in demanding extrusion applications.",
+          "Puncture Resistance": "Supports puncture resistance in high-performance film applications.",
+          "Compounding": "Supports selected compound applications where toughness or melt strength enhancement is needed."
+        }
+      },
+      {
+        trademark: "PIVOTAL®",
+        url: "https://www.westlake.com/polyethylene-products/pivotaltm-performance-pcr",
+        description: "Performance PCR solutions for recycled-content film systems and circular packaging applications.",
+        resinType: ["Specialty / PCR"],
+        processingMethod: ["Blown film", "Cast film"],
+        market: [
+          "Packaging",
+          "Consumer Products",
+          "Industrial",
+          "Flexible Films",
+          "Sustainability & Circular Solutions"
+        ],
+        application: [
+          "PCR Integration",
+          "Circular Packaging",
+          "Recycle-Ready Structures",
+          "Trash Bags & Liners",
+          "Heavy-Duty Film",
+          "Down-Gauging Support",
+          "Recycled-Content Film"
+        ],
+        context: {
+          "Packaging": "Supports recycled-content packaging film structures.",
+          "Consumer Products": "Supports recycled-content consumer film applications such as trash bags and liners.",
+          "Industrial": "Supports recycled-content heavy-duty and industrial film structures.",
+          "Flexible Films": "PCR platform for blown and cast film applications.",
+          "Sustainability & Circular Solutions": "Primary PIVOTAL® home: engineered performance PCR solutions for recycled-content film applications.",
+          "PCR Integration": "Designed to help incorporate post-consumer recycled content into film structures.",
+          "Circular Packaging": "Supports circular packaging and recycled-content film needs.",
+          "Down-Gauging Support": "Supports film performance needs where downgauging and recycled content are being considered."
+        }
+      },
+      {
+        trademark: "STEPUP™",
+        url: "https://www.westlake.com/polyethylene-products/stepuptm-recycle-modifiers",
+        description: "Recycle modifiers that support film strength, bubble stability, and down-gauging with recycled content.",
+        resinType: ["Specialty / Modifier"],
+        processingMethod: ["Blown film", "Cast film", "Compounding"],
+        market: [
+          "Packaging",
+          "Consumer Products",
+          "Industrial",
+          "Flexible Films",
+          "Sustainability & Circular Solutions",
+          "Performance Additives & Modification"
+        ],
+        application: [
+          "PCR Integration",
+          "Recycle-Ready Structures",
+          "Down-Gauging Support",
+          "Circular Packaging",
+          "Trash Bags & Liners",
+          "Heavy-Duty Film",
+          "Performance Modification",
+          "Bubble Stability"
+        ],
+        context: {
+          "Packaging": "Supports packaging film performance when recycled content or downgauging is part of the structure.",
+          "Consumer Products": "Supports consumer film applications such as trash bags and liners where recycled content performance is needed.",
+          "Industrial": "Supports heavy-duty and industrial film structures using recycled content.",
+          "Flexible Films": "Recycle modifier platform for blown and cast film applications.",
+          "Sustainability & Circular Solutions": "Primary STEPUP™ home: recycle modifiers for film strength, bubble stability, and downgauging with recycled content.",
+          "Performance Additives & Modification": "Functions as a recycle-performance modifier to help support film strength, bubble stability, and downgauging in recycled-content structures.",
+          "PCR Integration": "Helps address performance challenges associated with incorporating PCR or internal recycle streams.",
+          "Down-Gauging Support": "Supports film strength and downgauging potential.",
+          "Bubble Stability": "Supports bubble stability in film conversion with recycled content."
+        }
+      },
+      {
+        trademark: "ELEVATE® EVA",
+        url: "https://www.westlake.com/polyethylene-products/elevate%C2%AE-eva-0",
+        description: "EVA copolymers for packaging, films, tubing, heat-seal layers, foams, adhesives, solar, barrier structures, and specialty applications.",
+        resinType: ["EVA"],
+        processingMethod: ["Extrusion", "Compounding", "Blow molding", "Foaming", "Coating"],
+        market: [
+          "Packaging",
+          "Consumer Products",
+          "Masterbatch & Compounding",
+          "Transportation",
+          "Healthcare & Hygiene",
+          "Building, Construction & Infrastructure",
+          "Coatings, Adhesives & Specialty Materials",
+          "Flexible Films",
+          "Barrier & Multilayer Packaging",
+          "Performance Additives & Modification"
+        ],
+        application: [
+          "Flexible Films",
+          "High Clarity Packaging",
+          "Heat Seal Layer",
+          "Frozen Food Packaging",
+          "Foam",
+          "Tubing",
+          "Hot Melt Adhesives",
+          "Solar Film Encapsulant",
+          "Molded Components",
+          "Compounding",
+          "Ductility & Processability",
+          "Blow Molding",
+          "Cap Liners",
+          "Barrier Structures"
+        ],
+        context: {
+          "Packaging": "EVA platform for packaging films, high-clarity packaging, frozen food packaging, heat seal layers, foam-related protective packaging, and related flexible structures.",
+          "Consumer Products": "Supports consumer-related foam, tubing, molded, and specialty applications.",
+          "Masterbatch & Compounding": "Supports filled compounds and masterbatch applications where ductility and processability are needed.",
+          "Transportation": "Supports selected molded, tubing, and specialty mobility applications.",
+          "Healthcare & Hygiene": "Supports selected packaging, fitment, and specialty applications where EVA properties may be useful.",
+          "Building, Construction & Infrastructure": "Supports foam, tubing, solar-related applications, and specialty uses that may fit building or infrastructure contexts.",
+          "Coatings, Adhesives & Specialty Materials": "Supports hot melt adhesive, specialty formulation, and solar film encapsulant applications.",
+          "Flexible Films": "Supports flexible films, heat seal layers, frozen food packaging, and high-clarity packaging applications.",
+          "Barrier & Multilayer Packaging": "Supports selected flexible and multilayer packaging structures where EVA contributes seal, flexibility, or specialty performance.",
+          "Performance Additives & Modification": "Supports ductility and processability in filled compounds and specialty formulations where EVA copolymer chemistry improves performance.",
+          "Foam": "EVA grades support foam applications.",
+          "Hot Melt Adhesives": "EVA grades support hot melt adhesive applications.",
+          "Solar Film Encapsulant": "EVA chemistry can support solar encapsulant applications.",
+          "Ductility & Processability": "Supports improved ductility and processability in filled or specialty compounds.",
+          "Barrier Structures": "Supports selected multilayer packaging structures where EVA contributes flexibility, seal, or specialty layer performance."
+        }
+      },
+      {
+        trademark: "EMAC® / EBAC®",
+        url: "https://www.westlake.com/polyethylene-products/emac%C2%AE-and-ebac%C2%AE-acrylate-resins",
+        description: "Acrylate copolymers for flexibility, adhesion, lamination, extrusion coating, compounding, solar film, packaging, and compatibilization.",
+        resinType: ["Acrylate Copolymers"],
+        processingMethod: ["Extrusion coating", "Lamination", "Blown film", "Cast film", "Injection molding", "Compounding"],
+        market: [
+          "Packaging",
+          "Consumer Products",
+          "Building, Construction & Infrastructure",
+          "Masterbatch & Compounding",
+          "Transportation",
+          "Coatings, Adhesives & Specialty Materials",
+          "Extrusion Coating & Lamination",
+          "Barrier & Multilayer Packaging",
+          "Flexible Films",
+          "Performance Additives & Modification"
+        ],
+        application: [
+          "Flexible Films",
+          "Food Packaging",
+          "Non-Food Packaging",
+          "Extrusion Coating",
+          "Lamination",
+          "Adhesion & Tie Layers",
+          "Barrier Structures",
+          "Compounding",
+          "Compatibilization",
+          "Impact Modification",
+          "Solar Film Encapsulant",
+          "PET Impact Modifier",
+          "Thermal Lamination",
+          "Masterbatch Carrier",
+          "Specialty Compounds"
+        ],
+        context: {
+          "Packaging": "Supports packaging through flexible films, extrusion coating, lamination, adhesion, tie-layer, and multilayer structure applications.",
+          "Consumer Products": "Supports selected consumer product applications where flexibility, adhesion, impact performance, or specialty copolymer functionality is needed.",
+          "Building, Construction & Infrastructure": "Supports selected building and infrastructure applications such as solar film, specialty lamination, and adhesive-layer structures.",
+          "Masterbatch & Compounding": "Supports masterbatch carrier, compatibilization, and compounding applications.",
+          "Transportation": "Supports PET impact modification and selected specialty mobility uses.",
+          "Coatings, Adhesives & Specialty Materials": "Supports extrusion coatings, lamination, adhesion, solar film encapsulant, and specialty materials applications.",
+          "Extrusion Coating & Lamination": "Supports extrusion coating and lamination applications where adhesion, flexibility, and acrylate functionality are needed.",
+          "Barrier & Multilayer Packaging": "Supports adhesion, tie-layer, and multilayer structure applications.",
+          "Flexible Films": "Supports flexible film applications where acrylate copolymer chemistry provides flexibility and performance.",
+          "Performance Additives & Modification": "Functions as a compatibilizer, impact modifier, and specialty acrylate copolymer for compounding, PET impact modification, adhesion, and performance modification applications.",
+          "Food Packaging": "Supports selected packaging film, lamination, and adhesion applications.",
+          "Extrusion Coating": "Supports extrusion coating applications where adhesion and acrylate functionality are needed.",
+          "Lamination": "Supports lamination and thermal lamination applications.",
+          "Compatibilization": "Supports compatibility in selected compound and multilayer structures.",
+          "Impact Modification": "Supports impact modification, including PET impact modifier applications.",
+          "Masterbatch Carrier": "Can function as a carrier resin in masterbatch applications.",
+          "Solar Film Encapsulant": "EBAC® is associated with solar film applications."
+        }
+      },
+      {
+        trademark: "EPOLENE®",
+        url: "https://www.westlake.com/polyethylene-products/epolene%C2%AE",
+        description: "Specialty polymers and waxes for dispersion, lubrication, compatibilization, processing aids, coatings, adhesives, asphalt modification, wax modification, PVC lubrication, and cable filling.",
+        resinType: ["Specialty Polymers / Waxes"],
+        processingMethod: ["Compounding", "Coating", "Lamination"],
+        market: [
+          "Masterbatch & Compounding",
+          "Coatings, Adhesives & Specialty Materials",
+          "Building, Construction & Infrastructure",
+          "Transportation",
+          "Performance Additives & Modification"
+        ],
+        application: [
+          "Color Masterbatch",
+          "Additive Masterbatch",
+          "Dispersion & Lubrication",
+          "Compatibilization",
+          "Coupling Agents",
+          "Processing Aids",
+          "PVC Lubrication",
+          "Wax Modification",
+          "Hot Melt Adhesives",
+          "Coatings",
+          "Asphalt Modification",
+          "Cable Filling",
+          "Wire & Cable",
+          "Specialty Compounds",
+          "Pigment Dispersion",
+          "Filler Loading",
+          "Torque Reduction",
+          "Mold Release",
+          "Emulsions"
+        ],
+        context: {
+          "Masterbatch & Compounding": "Supports masterbatch and compounding through dispersion, lubrication, pigment dispersion, filler loading, and processing support.",
+          "Coatings, Adhesives & Specialty Materials": "Supports hot melt adhesives, coatings, emulsions, wax modification, asphalt modification, cable filling, and specialty material applications.",
+          "Building, Construction & Infrastructure": "Supports asphalt modification, roofing/paving-related uses, PVC lubrication, wire and cable filling, cable flooding, and other building/infrastructure specialty applications.",
+          "Transportation": "Supports specialty modification and additive uses where waxes, processing aids, or compatibilizers are relevant.",
+          "Performance Additives & Modification": "Primary EPOLENE® technical selector path: dispersion aids, lubricants, compatibilizers, coupling agents, processing aids, wax modification, PVC lubrication, pigment dispersion, filler loading, and torque reduction.",
+          "Color Masterbatch": "Supports color masterbatch through pigment dispersion and processability.",
+          "Additive Masterbatch": "Supports additive masterbatch formulations through dispersion and lubrication.",
+          "Dispersion & Lubrication": "Primary EPOLENE® function in masterbatch and compounding applications.",
+          "Compatibilization": "Maleic-grafted EPOLENE® grades support compatibilization and coupling.",
+          "Coupling Agents": "Supports coupling and homogenization in selected compounded materials.",
+          "Processing Aids": "Functions as a processing aid in plastics and specialty formulations.",
+          "PVC Lubrication": "Supports PVC lubrication applications.",
+          "Wax Modification": "Supports wax modification applications.",
+          "Asphalt Modification": "Supports asphalt modification for paving and roofing uses.",
+          "Hot Melt Adhesives": "Used as base polymers in selected hot melt adhesive applications.",
+          "Cable Filling": "Supports cable filling / cable flooding-related applications.",
+          "Wire & Cable": "Supports wire and cable applications through cable filling and specialty polymer/wax functionality.",
+          "Pigment Dispersion": "Helps promote more homogeneous pigment dispersion.",
+          "Filler Loading": "Supports higher pigment and filler loading efficiency.",
+          "Torque Reduction": "Helps reduce torque during masterbatch and compounding processes."
+        }
+      },
+      {
+        trademark: "LDPE Film Grades",
+        url: "https://www.westlake.com/polyethylene-products/ldpe-film",
+        description: "LDPE film grades for heavy-duty film, shrink film, clarity film, cast film, foam, bakery bags, medical film, wire & cable, compounding base, and general film applications.",
+        resinType: ["LDPE"],
+        processingMethod: ["Blown film", "Cast film", "Foaming", "Compounding"],
+        market: [
+          "Packaging",
+          "Consumer Products",
+          "Industrial",
+          "Agriculture",
+          "Building, Construction & Infrastructure",
+          "Healthcare & Hygiene",
+          "Masterbatch & Compounding",
+          "Flexible Films"
+        ],
+        application: [
+          "Flexible Films",
+          "Food Packaging",
+          "Shrink Film",
+          "Heavy-Duty Film",
+          "Industrial Shrink Film",
+          "Clarity Film",
+          "Cast Film",
+          "Foam",
+          "Bakery Bags",
+          "Medical Film",
+          "Bubble Stabilizers",
+          "Compounding Base",
+          "Household Wrap",
+          "Construction Film",
+          "Wire & Cable"
+        ],
+        context: {
+          "Packaging": "Supports food packaging, bakery bags, shrink film, clarity film, foam and cast film, protective foam packaging, and other packaging film applications.",
+          "Consumer Products": "Supports consumer film uses such as household wrap and general-purpose film applications.",
+          "Industrial": "Supports heavy-duty bags, industrial shrink film, and protective film applications.",
+          "Agriculture": "Supports selected agricultural and outdoor film applications.",
+          "Building, Construction & Infrastructure": "Supports construction film, foam-related building applications, and wire & cable-related LDPE film uses where applicable.",
+          "Healthcare & Hygiene": "Supports medical film applications.",
+          "Masterbatch & Compounding": "Supports masterbatch and compounding customers as an LDPE base resin option, including compounding base applications.",
+          "Flexible Films": "Core LDPE film grade family for blown and cast film applications.",
+          "Foam": "LDPE film grades include foam-related applications.",
+          "Shrink Film": "Supports shrink film applications.",
+          "Heavy-Duty Film": "Supports heavy-duty film and industrial film uses.",
+          "Medical Film": "Supports medical film applications.",
+          "Construction Film": "Supports selected construction film applications.",
+          "Compounding Base": "Supports compounding base applications.",
+          "Wire & Cable": "Supports wire and cable-related LDPE applications listed in the film grade portfolio."
+        }
+      },
+      {
+        trademark: "LDPE Injection Grades",
+        url: "https://www.westlake.com/polyethylene-products/injection-molding",
+        description: "LDPE injection molding grades for packaging, fitments, personal hygiene, molded specialty uses, medical-related components, and selected compounding/base resin needs.",
+        resinType: ["LDPE"],
+        processingMethod: ["Injection molding", "Compounding"],
+        market: [
+          "Packaging",
+          "Consumer Products",
+          "Healthcare & Hygiene",
+          "Transportation",
+          "Masterbatch & Compounding"
+        ],
+        application: [
+          "Rigid Packaging",
+          "Caps & Closures",
+          "Fitments",
+          "Personal Hygiene",
+          "Medical Packaging",
+          "Surgical Scrub Brushes",
+          "Molded Components",
+          "Disposable Goods",
+          "Compounding"
+        ],
+        context: {
+          "Packaging": "Supports rigid packaging, caps, closures, lids, fitments, and molded packaging components.",
+          "Consumer Products": "Supports molded consumer applications, disposable goods, and fitments.",
+          "Healthcare & Hygiene": "Supports medical packaging, personal hygiene, and surgical scrub brush applications.",
+          "Transportation": "Supports selected molded specialty uses where LDPE injection molding grades are applicable.",
+          "Masterbatch & Compounding": "Supports selected compounding and base resin needs where LDPE injection or molding-grade properties are relevant.",
+          "Rigid Packaging": "Supports molded packaging applications such as lids, caps, closures, and fitments.",
+          "Caps & Closures": "Supports injection molded caps and closure applications.",
+          "Personal Hygiene": "Supports personal hygiene-related molded applications.",
+          "Medical Packaging": "Supports medical packaging and related molded components.",
+          "Molded Components": "Supports molded specialty applications.",
+          "Compounding": "Supports selected compound applications where LDPE base resin properties are needed."
+        }
+      }
+    ];
+
+    const browseCategories = [
+      {
+        key: "market",
+        label: "Market",
+        sub: "Start with markets and solution areas",
+        values: [
+          "Packaging",
+          "Consumer Products",
+          "Industrial",
+          "Agriculture",
+          "Building, Construction & Infrastructure",
+          "Masterbatch & Compounding",
+          "Transportation",
+          "Healthcare & Hygiene",
+          "Coatings, Adhesives & Specialty Materials",
+          "Sustainability & Circular Solutions",
+          "Flexible Films",
+          "Extrusion Coating & Lamination",
+          "Barrier & Multilayer Packaging",
+          "Performance Additives & Modification"
+        ]
+      },
+      {
+        key: "trademark",
+        label: "Product Family",
+        sub: "Browse by WLK PE product family",
+        values: [
+          "HIFOR®",
+          "HIFOR CLEAR®",
+          "HIFOR XTREME®",
+          "TRUCOAT®",
+          "TYMAX®",
+          "MXSTEN®",
+          "PIVOTAL®",
+          "STEPUP™",
+          "ELEVATE® EVA",
+          "EMAC® / EBAC®",
+          "EPOLENE®",
+          "LDPE Film Grades",
+          "LDPE Injection Grades"
+        ]
+      },
+      {
+        key: "application",
+        label: "Application",
+        sub: "Browse by use case",
+        values: [
+          "Food Packaging",
+          "Non-Food Packaging",
+          "Flexible Films",
+          "Shrink Film",
+          "Stretch Film",
+          "Extrusion Coating",
+          "Lamination",
+          "Rigid Packaging",
+          "Caps & Closures",
+          "Pouches & Liners",
+          "Trash Bags & Liners",
+          "Household Wrap",
+          "Heavy-Duty Film",
+          "Protective Films",
+          "Industrial Liners & Containment",
+          "Agricultural Film",
+          "Irrigation Tubing",
+          "Construction Film",
+          "Medical Packaging",
+          "Sterile Packaging",
+          "Hygiene Film",
+          "Color Masterbatch",
+          "Additive Masterbatch",
+          "Compounding",
+          "Masterbatch Carrier",
+          "Compounding Base",
+          "Dispersion & Lubrication",
+          "Pigment Dispersion",
+          "Filler Loading",
+          "Compatibilization",
+          "Coupling Agents",
+          "Processing Aids",
+          "PVC Lubrication",
+          "Wax Modification",
+          "Impact Modification",
+          "Adhesion & Tie Layers",
+          "Barrier Structures",
+          "Hot Melt Adhesives",
+          "Coatings",
+          "Asphalt Modification",
+          "Wire & Cable",
+          "Cable Filling",
+          "Foam",
+          "Solar Film Encapsulant",
+          "PCR Integration",
+          "Recycle-Ready Structures",
+          "Down-Gauging Support",
+          "Circular Packaging",
+          "Molded Components",
+          "High Clarity Film",
+          "High Strength Film",
+          "Bubble Stability",
+          "Ductility & Processability"
+        ]
+      },
+      {
+        key: "processingMethod",
+        label: "Processing Method",
+        sub: "How the material is used",
+        values: [
+          "Blown film",
+          "Cast film",
+          "Extrusion coating",
+          "Lamination",
+          "Injection molding",
+          "Blow molding",
+          "Extrusion",
+          "Compounding",
+          "Coating",
+          "Foaming"
+        ]
+      },
+      {
+        key: "resinType",
+        label: "Resin Type",
+        sub: "Material family",
+        values: [
+          "LDPE",
+          "LLDPE",
+          "EVA",
+          "Plastomers",
+          "Functionalized Polymers",
+          "Acrylate Copolymers",
+          "Specialty Polymers / Waxes",
+          "Specialty / PCR",
+          "Specialty / Modifier"
+        ]
+      }
+    ];
+
+    const relevanceOrder = {
+      "Packaging": ["HIFOR®","HIFOR CLEAR®","HIFOR XTREME®","TRUCOAT®","TYMAX®","EMAC® / EBAC®","ELEVATE® EVA","MXSTEN®","LDPE Film Grades","LDPE Injection Grades","PIVOTAL®","STEPUP™"],
+      "Consumer Products": ["HIFOR XTREME®","HIFOR®","LDPE Film Grades","LDPE Injection Grades","PIVOTAL®","STEPUP™","ELEVATE® EVA","EMAC® / EBAC®"],
+      "Industrial": ["HIFOR XTREME®","HIFOR®","MXSTEN®","LDPE Film Grades","PIVOTAL®","STEPUP™"],
+      "Agriculture": ["HIFOR®","HIFOR XTREME®","MXSTEN®","HIFOR CLEAR®","LDPE Film Grades"],
+      "Building, Construction & Infrastructure": ["EPOLENE®","EMAC® / EBAC®","MXSTEN®","HIFOR®","LDPE Film Grades","ELEVATE® EVA"],
+      "Masterbatch & Compounding": ["EPOLENE®","EMAC® / EBAC®","ELEVATE® EVA","MXSTEN®","HIFOR®","LDPE Film Grades","LDPE Injection Grades"],
+      "Transportation": ["EMAC® / EBAC®","ELEVATE® EVA","LDPE Injection Grades","EPOLENE®"],
+      "Healthcare & Hygiene": ["TRUCOAT®","HIFOR CLEAR®","LDPE Injection Grades","LDPE Film Grades","TYMAX®","ELEVATE® EVA"],
+      "Coatings, Adhesives & Specialty Materials": ["TRUCOAT®","EPOLENE®","ELEVATE® EVA","EMAC® / EBAC®","TYMAX®"],
+      "Sustainability & Circular Solutions": ["PIVOTAL®","STEPUP™","HIFOR XTREME®","MXSTEN®"],
+      "Flexible Films": ["HIFOR®","HIFOR CLEAR®","HIFOR XTREME®","MXSTEN®","LDPE Film Grades","ELEVATE® EVA","EMAC® / EBAC®","PIVOTAL®","STEPUP™"],
+      "Extrusion Coating & Lamination": ["TRUCOAT®","TYMAX®","EMAC® / EBAC®"],
+      "Barrier & Multilayer Packaging": ["TYMAX®","EMAC® / EBAC®","TRUCOAT®","MXSTEN®","ELEVATE® EVA","HIFOR CLEAR®"],
+      "Performance Additives & Modification": ["EPOLENE®","MXSTEN®","EMAC® / EBAC®","ELEVATE® EVA","STEPUP™"],
+      "LDPE": ["TRUCOAT®","LDPE Film Grades","LDPE Injection Grades"],
+      "LLDPE": ["HIFOR®","HIFOR CLEAR®","HIFOR XTREME®"],
+      "EVA": ["ELEVATE® EVA"],
+      "Plastomers": ["MXSTEN®"],
+      "Functionalized Polymers": ["TYMAX®"],
+      "Acrylate Copolymers": ["EMAC® / EBAC®"],
+      "Specialty Polymers / Waxes": ["EPOLENE®"],
+      "Specialty / PCR": ["PIVOTAL®"],
+      "Specialty / Modifier": ["STEPUP™"],
+      "Extrusion Coating": ["TRUCOAT®","TYMAX®","EMAC® / EBAC®"],
+      "Lamination": ["TRUCOAT®","EMAC® / EBAC®","TYMAX®"],
+      "Foam": ["ELEVATE® EVA","LDPE Film Grades"],
+      "Solar Film Encapsulant": ["EMAC® / EBAC®","ELEVATE® EVA"],
+      "Wire & Cable": ["EPOLENE®","LDPE Film Grades"],
+      "Cable Filling": ["EPOLENE®"],
+      "Compounding": ["EPOLENE®","EMAC® / EBAC®","ELEVATE® EVA","MXSTEN®","HIFOR®","LDPE Film Grades","LDPE Injection Grades"],
+      "Masterbatch Carrier": ["HIFOR®","EMAC® / EBAC®","LDPE Film Grades"],
+      "Dispersion & Lubrication": ["EPOLENE®"],
+      "Compatibilization": ["EPOLENE®","EMAC® / EBAC®"],
+      "Impact Modification": ["MXSTEN®","EMAC® / EBAC®"],
+      "PCR Integration": ["PIVOTAL®","STEPUP™"],
+      "Recycle-Ready Structures": ["PIVOTAL®","STEPUP™","HIFOR XTREME®","MXSTEN®"]
+    };
+
+    const browseCards = document.getElementById("browseCards");
+    const panelTitle = document.getElementById("panelTitle");
+    const panelSub = document.getElementById("panelSub");
+    const valueGrid = document.getElementById("valueGrid");
+    const resultsGrid = document.getElementById("resultsGrid");
+    const emptyState = document.getElementById("emptyState");
+    const resultsTitle = document.getElementById("resultsTitle");
+    const resultsSub = document.getElementById("resultsSub");
+
+    let activeCategory = null;
+    let activeValue = null;
+
+    function getContextDescription(product) {
+      if (activeValue && product.context && product.context[activeValue]) {
+        return product.context[activeValue];
+      }
+
+      if (activeCategory === "trademark") {
+        return product.description;
+      }
+
+      return `${product.description} This product family is mapped to ${activeValue} based on its relevant markets, applications, processing methods, or resin type.`;
+    }
+
+    function sortByRelevance(results) {
+      const order = relevanceOrder[activeValue] || [];
+
+      return results.slice().sort((a, b) => {
+        const aIndex = order.indexOf(a.trademark);
+        const bIndex = order.indexOf(b.trademark);
+
+        if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
+        if (aIndex !== -1) return -1;
+        if (bIndex !== -1) return 1;
+
+        return a.trademark.localeCompare(b.trademark);
+      });
+    }
+
+    function renderBrowseCards() {
+      browseCards.innerHTML = browseCategories.map(cat => {
+        const softCard = cat.key === "application" || cat.key === "processingMethod" ? "soft" : "";
+
+        return `
+          <button class="browse-card ${softCard} ${activeCategory === cat.key ? "active" : ""}" data-key="${cat.key}">
+            <span class="browse-card-title">${cat.label}</span>
+            <span class="browse-card-sub">${cat.sub}</span>
+          </button>
+        `;
+      }).join("");
+
+      document.querySelectorAll(".browse-card").forEach(card => {
+        card.addEventListener("click", () => {
+          const key = card.dataset.key;
+          if (activeCategory === key) {
+            activeCategory = null;
+            activeValue = null;
+          } else {
+            activeCategory = key;
+            activeValue = null;
+          }
+          renderBrowseCards();
+          renderPanel();
+          renderResults();
+        });
+      });
+    }
+
+    function renderPanel() {
+      if (!activeCategory) {
+        panelTitle.textContent = "Choose a category to begin";
+        panelSub.textContent = "Select one browse path at a time to keep the experience simple and easy to use.";
+        valueGrid.innerHTML = "";
+        return;
+      }
+
+      const category = browseCategories.find(c => c.key === activeCategory);
+      panelTitle.textContent = `Browse by ${category.label}`;
+      panelSub.textContent = `Select a ${category.label.toLowerCase()} value to view matching product brands.`;
+
+      valueGrid.innerHTML = category.values.map(val => `
+        <button class="value-chip ${activeValue === val ? "selected" : ""}" data-value="${val}">
+          ${val}
+        </button>
+      `).join("");
+
+      document.querySelectorAll(".value-chip").forEach(chip => {
+        chip.addEventListener("click", () => {
+          const value = chip.dataset.value;
+          activeValue = activeValue === value ? null : value;
+          renderPanel();
+          renderResults();
+        });
+      });
+    }
+
+    function renderResults() {
+      if (!activeCategory || !activeValue) {
+        resultsTitle.textContent = "Product results";
+        resultsSub.textContent = "Choose a category and value to view matching product brands.";
+        resultsGrid.innerHTML = "";
+        emptyState.style.display = "block";
+        emptyState.textContent = "Choose a category and value to view matching product brands.";
+        return;
+      }
+
+      const results = products.filter(product => {
+        const rawValue = product[activeCategory];
+        const values = Array.isArray(rawValue) ? rawValue : [rawValue];
+        return values.includes(activeValue);
+      });
+
+      const sortedResults = sortByRelevance(results);
+
+      resultsTitle.textContent = `${sortedResults.length} matching product${sortedResults.length === 1 ? "" : "s"}`;
+      resultsSub.textContent = `${activeValue} → matching product brands, sorted by relevance`;
+
+      if (!sortedResults.length) {
+        resultsGrid.innerHTML = "";
+        emptyState.style.display = "block";
+        emptyState.textContent = "No matching products for this selection.";
+        return;
+      }
+
+      emptyState.style.display = "none";
+
+      resultsGrid.innerHTML = sortedResults.map(product => {
+        const tags = [];
+
+        if (activeValue) tags.push(activeValue);
+        if (activeCategory !== "trademark") tags.push(product.trademark);
+        if (product.resinType && product.resinType.length) tags.push(product.resinType[0]);
+
+        return `
+          <article class="product-card">
+            <h3>${product.trademark}</h3>
+            <p>${getContextDescription(product)}</p>
+
+            <div class="mini-tags">
+              ${tags.map(tag => `<span class="mini-tag">${tag}</span>`).join("")}
+            </div>
+
+            <div class="card-actions">
+              <a class="btn btn-primary" href="${product.url}" target="_blank" rel="noopener noreferrer">View Product Details</a>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    renderBrowseCards();
+    renderPanel();
+    renderResults();
+  </script>
+</body>
+</html>
